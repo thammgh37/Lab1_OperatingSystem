@@ -1,6 +1,10 @@
 #! /usr/bin/bash
 
-ANS=$(<myvar.txt)
+if [ -s "myvar.txt" ]; then
+	ANS=$(<myvar.txt)
+else
+	ANS=0
+fi
 exp=""
 
 displayHist() {
@@ -39,13 +43,17 @@ Calculate() {
 		result=`echo $operand1 \* $operand2 | bc`
 		;;
 		"/")
-		if [ $operation2 -eq 0 ]; then
+		if [ $operand2 -eq 0 ]; then
 			echo "MATH ERROR"
 			return 1
 		fi
 		result=`echo "scale=2; $operand1 / $operand2" | bc`
 		;;
 		"%")
+  		if [ $operand2 -eq 0 ]; then
+			echo "MATH ERROR"
+			return 1
+		fi
 		result=`echo $(($operand1 / $operand2))`
 		;;
 		*)
