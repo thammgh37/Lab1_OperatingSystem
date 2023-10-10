@@ -29,8 +29,6 @@ int checkValid (){
 
     // check valid of operator
     if (strlen(op) != 1){
-        printf("%s\n",op);
-        printf("error2\n");
         return 0;
     }
 
